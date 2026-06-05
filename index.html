@@ -3,17 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Taha Mods</title>
-    <!-- استدعاء أيقونات FontAwesome للحسابات -->
+    <title>Elite Community</title>
+    <!-- استدعاء أيقونات FontAwesome المحدثة -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
             --bg-color: #0d1117;
             --card-bg: #161b22;
             --accent-color: #58a6ff;
+            --neon-blue: #00f2fe;
             --text-color: #c9d1d9;
             --text-fade: #8b949e;
             --success-color: #238636;
+            --warning-color: #d29922;
         }
 
         body {
@@ -22,41 +24,48 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            padding-bottom: 80px; /* مسافة لشريط التنقل السفلي */
+            padding-bottom: 80px;
+        }
+
+        /* الهيدر الجديد: مستطيل علوي جهة اليمين بزوايا دائرية */
+        header {
+            display: flex;
+            justify-content: flex-start;
+            padding: 15px 20px;
+        }
+
+        .community-badge {
+            background-color: #1f2937;
+            color: var(--neon-blue);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border: 1px solid rgba(0, 242, 254, 0.3);
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
+            letter-spacing: 0.5px;
         }
 
         /* حاوية الصفحات */
         .page {
             display: none;
-            padding: 20px;
+            padding: 10px 20px;
             max-width: 600px;
             margin: 0 auto;
             animation: fadeIn 0.4s ease-in-out;
         }
 
-        .page.active {
-            display: block;
-        }
+        .page.active { display: block; }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        header {
-            text-align: center;
-            padding: 30px 20px 10px 20px;
-        }
-
-        header h1 { color: var(--accent-color); margin: 0; font-size: 2rem; }
-        header p { color: var(--text-fade); margin: 5px 0 0 0; }
-
         /* شريط التنقل السفلي */
         .navbar {
             position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
+            bottom: 0; left: 0; right: 0;
             background-color: var(--card-bg);
             border-top: 1px solid #30363d;
             display: flex;
@@ -66,239 +75,131 @@
         }
 
         .nav-item {
-            background: none;
-            border: none;
+            background: none; border: none;
             color: var(--text-fade);
-            font-size: 0.9rem;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-            transition: 0.3s;
-            width: 33%;
+            font-size: 0.9rem; cursor: pointer;
+            display: flex; flex-direction: column;
+            align-items: center; gap: 4px;
+            transition: 0.3s; width: 33%;
         }
 
-        .nav-item i {
-            font-size: 1.3rem;
-        }
+        .nav-item i { font-size: 1.3rem; }
+        .nav-item.active { color: var(--accent-color); font-weight: bold; transform: scale(1.05); }
 
-        .nav-item.active {
-            color: var(--accent-color);
-            font-weight: bold;
-            transform: scale(1.05);
-        }
-
-        /* قسم الحسابات والسوشيال ميديا */
-        .social-container {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
+        /* قنوات الاتصال */
+        .social-container { display: flex; flex-direction: column; gap: 15px; margin-top: 10px; }
         .social-card {
-            background-color: var(--card-bg);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-            color: var(--text-color);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            background-color: var(--card-bg); border: 1px solid #30363d;
+            border-radius: 12px; padding: 15px 20px;
+            display: flex; align-items: center; justify-content: space-between;
+            text-decoration: none; color: var(--text-color);
+            transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(0,0,0,0.2);
         }
-
-        .social-card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-color);
-            box-shadow: 0 6px 20px rgba(88, 166, 255, 0.2);
-        }
-
-        .social-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .social-info i {
-            font-size: 1.8rem;
-        }
-
-        /* ألوان الأيقونات المخصصة */
+        .social-card:hover { transform: translateY(-3px); border-color: var(--accent-color); }
+        .social-info { display: flex; align-items: center; gap: 15px; }
+        .social-info i { font-size: 1.8rem; }
         .fa-telegram { color: #0088cc; }
         .fa-tiktok { color: #ff0050; }
         .fa-discord { color: #5865F2; }
         .fa-youtube { color: #ff0000; }
-
         .social-text h3 { margin: 0; font-size: 1.1rem; }
         .social-text p { margin: 2px 0 0 0; font-size: 0.85rem; color: var(--text-fade); }
 
-        .go-icon {
-            color: var(--text-fade);
-            transition: 0.3s;
-        }
-        .social-card:hover .go-icon {
-            color: var(--accent-color);
-            transform: translateX(-5px);
-        }
-
-        /* كروت المود باكات واللانشرات */
-        .modpack-list {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            margin-top: 15px;
-        }
-
+        /* كروت المود باكات */
+        .modpack-list { display: flex; flex-direction: column; gap: 20px; margin-top: 10px; }
         .modpack-card {
-            background-color: var(--card-bg);
-            border: 1px solid #30363d;
-            border-radius: 12px;
-            overflow: hidden;
-            cursor: pointer;
-            transition: 0.3s;
+            background-color: var(--card-bg); border: 1px solid #30363d;
+            border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s;
         }
-
-        .modpack-card:hover {
-            border-color: var(--accent-color);
+        .modpack-card:hover { border-color: var(--accent-color); }
+        .modpack-img { width: 100%; height: 160px; object-fit: cover; background-color: #21262d; }
+        .modpack-details { padding: 15px; text-align: right; }
+        .modpack-details h3 { margin: 0 0 10px 0; color: var(--accent-color); display: flex; align-items: center; gap: 8px; }
+        
+        /* تنسيق الأيقونات البيضاء المخصصة */
+        .custom-icon {
+            color: #ffffff !important;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px;
         }
-
-        .modpack-img {
-            width: 100%;
-            height: 160px;
-            object-fit: cover;
-            background-color: #21262d;
-        }
-
-        .modpack-details {
-            padding: 15px;
-            text-align: right;
-        }
-
-        .modpack-details h3 { margin: 0 0 8px 0; color: var(--accent-color); }
-        .modpack-info-line { font-size: 0.9rem; margin: 4px 0; color: var(--text-fade); }
+        
+        .modpack-info-line { font-size: 0.9rem; margin: 6px 0; color: var(--text-fade); display: flex; align-items: center; gap: 8px; }
         .modpack-info-line strong { color: var(--text-color); }
 
-        /* الأزرار العائمة والنوافذ المنبثقة */
+        /* زر النشر العائم (+) */
         .fab-btn {
-            position: fixed;
-            bottom: 90px;
-            left: 20px;
-            background-color: var(--success-color);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 55px;
-            height: 55px;
-            font-size: 1.6rem;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: 0.3s;
-            z-index: 999;
+            position: fixed; bottom: 90px; left: 20px;
+            background-color: var(--success-color); color: white;
+            border: none; border-radius: 50%; width: 55px; height: 55px;
+            font-size: 1.6rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            display: flex; align-items: center; justify-content: center; z-index: 999;
         }
 
-        .fab-btn:hover { transform: scale(1.1); }
-
-        /* النافذة المنبثقة (Popup Modal) */
+        /* النوافذ المنبثقة */
         .modal {
-            display: none;
-            position: fixed;
-            top: 0; bottom: 0; left: 0; right: 0;
-            background-color: rgba(0,0,0,0.8);
-            z-index: 2000;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-            animation: fadeIn 0.3s ease;
+            display: none; position: fixed; top: 0; bottom: 0; left: 0; right: 0;
+            background-color: rgba(0,0,0,0.85); z-index: 2000;
+            justify-content: center; align-items: center; padding: 20px;
         }
-
         .modal.active { display: flex; }
-
         .modal-content {
-            background-color: var(--card-bg);
-            border: 1px solid #30363d;
-            border-radius: 15px;
-            width: 100%;
-            max-width: 500px;
-            padding: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            max-height: 85vh;
-            overflow-y: auto;
+            background-color: var(--card-bg); border: 1px solid #30363d;
+            border-radius: 15px; width: 100%; max-width: 500px; padding: 20px;
+            max-height: 85vh; overflow-y: auto;
         }
-
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #30363d;
-            padding-bottom: 10px;
-            margin-bottom: 15px;
-        }
-
-        .modal-header h2 { margin: 0; color: var(--accent-color); font-size: 1.3rem; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #30363d; padding-bottom: 10px; margin-bottom: 15px; }
+        .modal-header h2 { margin: 0; color: var(--accent-color); font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
         .close-modal { background: none; border: none; color: var(--text-fade); font-size: 1.5rem; cursor: pointer; }
 
-        /* الحقول داخل النافذة */
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-bottom: 12px;
-            text-align: right;
-        }
-
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: right; }
         .form-group label { font-size: 0.9rem; color: var(--text-fade); }
         .form-group input, .form-group textarea {
-            background-color: var(--bg-color);
+            background-color: var(--bg-color); border: 1px solid #30363d; border-radius: 6px; padding: 10px; color: var(--text-color); font-family: inherit;
+        }
+
+        /* تصميم مربع الوصف الجميل المحدث بوجود الأيقونة البيضاء */
+        .description-box {
+            background-color: #0d1117;
             border: 1px solid #30363d;
-            border-radius: 6px;
-            padding: 10px;
-            color: var(--text-color);
-            font-family: inherit;
-        }
-
-        .form-buttons {
-            display: flex;
-            gap: 10px;
-            margin-top: 15px;
-        }
-
-        .btn-action {
-            flex: 1;
-            padding: 10px;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-            text-decoration: none;
-            text-align: center;
-        }
-        .btn-save { background-color: var(--success-color); color: white; }
-        .btn-download { background-color: #21262d; color: var(--accent-color); border: 1px solid #30363d; }
-        .btn-guide { background-color: #388bfd; color: white; }
-
-        /* نص الوصف الداخلي للمودباك */
-        .modal-desc {
+            border-radius: 8px;
+            padding: 15px;
+            margin: 15px 0;
             text-align: right;
+            position: relative;
+        }
+        .description-title {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: bold;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .modal-desc {
             line-height: 1.6;
             color: var(--text-color);
-            margin: 15px 0;
+            margin: 0;
             white-space: pre-line;
+            font-size: 0.95rem;
         }
+
+        .form-buttons { display: flex; gap: 10px; margin-top: 15px; }
+        .btn-action { flex: 1; padding: 10px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center; }
+        .btn-save { background-color: var(--success-color); color: white; }
+        .btn-edit { background-color: var(--warning-color); color: black; }
+        .btn-download { background-color: #21262d; color: var(--accent-color); border: 1px solid #30363d; }
+        .btn-guide { background-color: #388bfd; color: white; }
     </style>
 </head>
 <body>
 
-    <!-- قسم الهيدر الثابت علوياً -->
+    <!-- الهيدر: مستطيل علوي جهة اليمين بزوايا دائرية -->
     <header>
-        <h1>Elite Taha Mods</h1>
-        <p>المنصة الرسمية للمودات واللانشرات</p>
+        <div class="community-badge">Elite Community</div>
     </header>
 
     <!-- ================= صفحة 1: Elite Team ================= -->
@@ -312,7 +213,7 @@
                         <p>تابع آخر التحديثات والمودات الحصرية</p>
                     </div>
                 </div>
-                <i class="fas fa-chevron-left go-icon"></i>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
             <a href="https://tiktok.com/@taha52389" target="_blank" class="social-card">
@@ -323,7 +224,7 @@
                         <p>شروحات سريعة واستعراض للمودات</p>
                     </div>
                 </div>
-                <i class="fas fa-chevron-left go-icon"></i>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
             <a href="https://discord.gg/d4eXguqpQD" target="_blank" class="social-card">
@@ -334,7 +235,7 @@
                         <p>تواصل مع مجتمع اللاعبين والدعم الفني</p>
                     </div>
                 </div>
-                <i class="fas fa-chevron-left go-icon"></i>
+                <i class="fas fa-chevron-left"></i>
             </a>
 
             <a href="https://www.youtube.com/@moxgo1322" target="_blank" class="social-card">
@@ -345,7 +246,7 @@
                         <p>شروحات تفصيلية ومقاطع أسلوب اللعب</p>
                     </div>
                 </div>
-                <i class="fas fa-chevron-left go-icon"></i>
+                <i class="fas fa-chevron-left"></i>
             </a>
         </div>
     </div>
@@ -353,13 +254,13 @@
     <!-- ================= صفحة 2: Modpack ================= -->
     <div id="modpack-page" class="page">
         <div class="modpack-list" id="modpacks-container">
-            <!-- مودباك تجريبي يظهر تلقائياً -->
-            <div class="modpack-card" onclick="openDetailsModal('Elite RPG', '1.1.1.1', 'Forge', 'https://via.placeholder.com/600x300/161b22/58a6ff?text=Elite+Pack', 'هذا المودباك يضيف تجربة مغامرات أسطورية لماينكرافت مع وحوش ورؤساء جدد وتطويرات خرافية للأسلحة والدروع.', '#', '#')">
-                <img src="https://via.placeholder.com/600x300/161b22/58a6ff?text=Elite+Pack" class="modpack-img" alt="Modpack Image">
+            <!-- كارت المودباك المبدئي بأيقونات مخصصة بيضاء بالكامل -->
+            <div class="modpack-card" id="pack-0" onclick="openDetailsModal('pack-0', 'Elite RPG', '1.1.1.1', 'Forge', 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?w=600', 'هذا المودباك يضيف تجربة مغامرات أسطورية لماينكرافت مع وحوش ورؤساء جدد وتطويرات خرافية للأسلحة والدروع.', '#', '#')">
+                <img src="https://images.unsplash.com/photo-1607988795691-3d0147b43231?w=600" class="modpack-img" alt="Modpack Image">
                 <div class="modpack-details">
-                    <h3>ModPack: Elite RPG</h3>
-                    <div class="modpack-info-line">Version: <strong>1.1.1.1</strong></div>
-                    <div class="modpack-info-line">Loader: <strong>Forge</strong></div>
+                    <h3><i class="fas fa-box custom-icon"></i> ModPack: Elite RPG</h3>
+                    <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong>1.1.1.1</strong></div>
+                    <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong>Forge</strong></div>
                 </div>
             </div>
         </div>
@@ -371,7 +272,7 @@
             <div class="modpack-card">
                 <div class="modpack-details">
                     <h3>Elite Launcher V1</h3>
-                    <div class="modpack-info-line">حجم خفيف جداً وتشغيل سريع للمودات.</div>
+                    <div class="modpack-info-line">حجم خفيف جداً وتشغيل سريع للمودات السيرفرية الشخصية.</div>
                     <div class="form-buttons">
                         <a href="#" class="btn-action btn-guide">تحميل الآن</a>
                     </div>
@@ -380,18 +281,20 @@
         </div>
     </div>
 
-    <!-- زر النشر العائم (+) الذي يظهر من منظورك كمسؤول -->
-    <button class="fab-btn" id="add-pack-btn" onclick="toggleModal('add-modal', true)">
+    <!-- زر الزائد العائم (+) لك كمسؤول -->
+    <button class="fab-btn" id="add-pack-btn" onclick="openAddModal()">
         <i class="fas fa-plus"></i>
     </button>
 
-    <!-- نافذة إضافة مود باك جديد (لك كمسؤول) -->
+    <!-- نافذة نشر وتعديل المودباك (خاصة بك كمطور) -->
     <div class="modal" id="add-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>نشر مود باك جديد 🚀</h2>
+                <h2 id="modal-form-title">نشر مود باك جديد 🚀</h2>
                 <button class="close-modal" onclick="toggleModal('add-modal', false)">&times;</button>
             </div>
+            <input type="hidden" id="edit-target-id">
+            
             <div class="form-group">
                 <label>اسم المود باك (ModPack Name)</label>
                 <input type="text" id="in-name" placeholder="مثال: Elite Survival">
@@ -406,11 +309,11 @@
             </div>
             <div class="form-group">
                 <label>رابط صورة الغلاف</label>
-                <input type="text" id="in-img" placeholder="ضع رابط الصورة هنا">
+                <input type="text" id="in-img" placeholder="ضع رابط الصورة المباشر هنا">
             </div>
             <div class="form-group">
                 <label>الوصف بالكامل (Description)</label>
-                <textarea id="in-desc" rows="4" placeholder="اكتب تفاصيل المودباك والمميزات..."></textarea>
+                <textarea id="in-desc" rows="4" placeholder="اكتب تفاصيل المودباك..."></textarea>
             </div>
             <div class="form-group">
                 <label>رابط التحميل</label>
@@ -420,28 +323,36 @@
                 <label>رابط شرح التركيب</label>
                 <input type="text" id="in-guide" placeholder="https://...">
             </div>
-            <button class="btn-action btn-save" style="width:100%; margin-top:10px;" onclick="saveNewModpack()">نشر المود باك</button>
+            <button class="btn-action btn-save" style="width:100%; margin-top:10px;" id="btn-submit-form" onclick="saveModpackProcess()">حفظ ونشر</button>
         </div>
     </div>
 
-    <!-- نافذة عرض تفاصيل المود باك بالكامل (للعضو عند الضغط) -->
+    <!-- نافذة عرض التفاصيل بالكامل للعضو والمطور مع الأيقونات المخصصة البيضاء -->
     <div class="modal" id="details-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="det-name">اسم المود باك</h2>
+                <h2 id="det-name"><i class="fas fa-box custom-icon"></i> اسم المود باك</h2>
                 <button class="close-modal" onclick="toggleModal('details-modal', false)">&times;</button>
             </div>
             <img src="" id="det-img" class="modpack-img" style="border-radius: 8px;">
             <div class="modpack-details" style="padding:10px 0;">
-                <div class="modpack-info-line">Version: <strong id="det-version"></strong></div>
-                <div class="modpack-info-line">Loader: <strong id="det-loader"></strong></div>
+                <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong id="det-version"></strong></div>
+                <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong id="det-loader"></strong></div>
             </div>
-            <div class="modal-desc" id="det-desc">
-                هنا يظهر الديسكربشن الكامل للمودباك...
+            
+            <!-- مربع الوصف المحدث مع الأيقونة البيضاء لكلمة الوصف -->
+            <div class="description-box">
+                <span class="description-title"><i class="fas fa-file-text custom-icon"></i> الوصف:</span>
+                <p class="modal-desc" id="det-desc">هنا يظهر الديسكربشن...</p>
             </div>
+
             <div class="form-buttons">
                 <a href="#" id="link-download" target="_blank" class="btn-action btn-download">رابط تحميل</a>
                 <a href="#" id="link-guide" target="_blank" class="btn-action btn-guide">شرح التركيب</a>
+            </div>
+            
+            <div style="margin-top: 10px;" id="developer-controls">
+                <button class="btn-action btn-edit" style="width: 100%;" id="btn-trigger-edit">✏️ تعديل المنشور (للمطور)</button>
             </div>
         </div>
     </div>
@@ -463,47 +374,85 @@
     </nav>
 
     <script>
-        // دالة التنقل بين الصفحات السفلية
+        let packCounter = 1;
+        let database = {
+            'pack-0': {
+                name: 'Elite RPG', version: '1.1.1.1', loader: 'Forge',
+                img: 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?w=600',
+                desc: 'هذا المودباك يضيف تجربة مغامرات أسطورية لماينكرافت مع وحوش ورؤساء جدد وتطويرات خرافية للأسلحة والدروع.',
+                download: '#', guide: '#'
+            }
+        };
+
         function switchPage(pageId, button) {
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
-            
             document.getElementById(pageId).classList.add('active');
             button.classList.add('active');
 
-            // إخفاء أو إظهار زر الإضافة (+) بناءً على الصفحة (يظهر فقط في صفحة المودباك)
             const addBtn = document.getElementById('add-pack-btn');
-            if(pageId === 'modpack-page') {
-                addBtn.style.display = 'flex';
-            } else {
-                addBtn.style.display = 'none';
-            }
+            if(pageId === 'modpack-page') { addBtn.style.display = 'flex'; } 
+            else { addBtn.style.display = 'none'; }
         }
-        
-        // كود مبدئي لإخفاء زر الزائد في البداية لأن الصفحة الأولى هي Elite Team
         document.getElementById('add-pack-btn').style.display = 'none';
 
-        // فتح وإغلاق النوافذ المنبثقة
         function toggleModal(modalId, show) {
             const modal = document.getElementById(modalId);
             if(show) modal.classList.add('active');
             else modal.classList.remove('active');
         }
 
-        // فتح نافذة تفاصيل المودباك وتعبئة البيانات فيها عند ضغط العضو
-        function openDetailsModal(name, version, loader, img, desc, downloadLink, guideLink) {
-            document.getElementById('det-name').innerText = "ModPack: " + name;
-            document.getElementById('det-version').innerText = version;
-            document.getElementById('det-loader').innerText = loader;
-            document.getElementById('det-img').src = img || 'https://via.placeholder.com/600x300/161b22/58a6ff?text=No+Image';
-            document.getElementById('det-desc').innerText = desc || 'لا يوجد وصف متاح.';
-            document.getElementById('link-download').href = downloadLink || '#';
-            document.getElementById('link-guide').href = guideLink || '#';
+        function openAddModal() {
+            document.getElementById('modal-form-title').innerText = "نشر مود باك جديد 🚀";
+            document.getElementById('edit-target-id').value = "";
+            document.getElementById('in-name').value = '';
+            document.getElementById('in-version').value = '1.1.1.1';
+            document.getElementById('in-loader').value = 'Forge';
+            document.getElementById('in-img').value = '';
+            document.getElementById('in-desc').value = '';
+            document.getElementById('in-download').value = '';
+            document.getElementById('in-guide').value = '';
+            toggleModal('add-modal', true);
+        }
+
+        function openDetailsModal(id, name, version, loader, img, desc, downloadLink, guideLink) {
+            const data = database[id] || { name, version, loader, img, desc, download: downloadLink, guide: guideLink };
+            
+            document.getElementById('det-name').innerHTML = `<i class="fas fa-box custom-icon"></i> ModPack: ${data.name}`;
+            document.getElementById('det-version').innerText = data.version;
+            document.getElementById('det-loader').innerText = data.loader;
+            document.getElementById('det-img').src = data.img || 'https://via.placeholder.com/600x300/161b22/58a6ff?text=No+Image';
+            document.getElementById('det-desc').innerText = data.desc || 'لا يوجد وصف متاح.';
+            document.getElementById('link-download').href = data.download || '#';
+            document.getElementById('link-guide').href = data.guide || '#';
+            
+            document.getElementById('btn-trigger-edit').onclick = function() {
+                toggleModal('details-modal', false);
+                triggerEditPack(id);
+            };
+
             toggleModal('details-modal', true);
         }
 
-        // حفظ ونشر مودباك جديد من منظورك الخاص
-        function saveNewModpack() {
+        function triggerEditPack(id) {
+            const data = database[id];
+            if(!data) return;
+
+            document.getElementById('modal-form-title').innerText = "✏️ تعديل منشور المود باك";
+            document.getElementById('edit-target-id').value = id;
+            document.getElementById('in-name').value = data.name;
+            document.getElementById('in-version').value = data.version;
+            document.getElementById('in-loader').value = data.loader;
+            document.getElementById('in-img').value = data.img;
+            document.getElementById('in-desc').value = data.desc;
+            document.getElementById('in-download').value = data.download;
+            document.getElementById('in-guide').value = data.guide;
+
+            toggleModal('add-modal', true);
+        }
+
+        function saveModpackProcess() {
+            const id = document.getElementById('edit-target-id').value;
             const name = document.getElementById('in-name').value;
             const version = document.getElementById('in-version').value;
             const loader = document.getElementById('in-loader').value;
@@ -512,39 +461,39 @@
             const download = document.getElementById('in-download').value;
             const guide = document.getElementById('in-guide').value;
 
-            if(!name) { alert('الرجاء كتابة اسم المود باك أولاً!'); return; }
+            if(!name) { alert('الرجاء كتابة اسم المود باك!'); return; }
             if(!img) { img = 'https://via.placeholder.com/600x300/161b22/58a6ff?text=' + encodeURIComponent(name); }
 
-            const container = document.getElementById('modpacks-container');
-            
-            // إنشاء عنصر الكارت الجديد
-            const card = document.createElement('div');
-            card.className = 'modpack-card';
-            
-            // تمرير البيانات المكتوبة بشكل آمن عند الضغط على الكارت
-            card.onclick = function() {
-                openDetailsModal(name, version, loader, img, desc, download, guide);
-            };
-
-            card.innerHTML = `
+            const cardContent = `
                 <img src="${img}" class="modpack-img" alt="Modpack Image">
                 <div class="modpack-details">
-                    <h3>ModPack: ${name}</h3>
-                    <div class="modpack-info-line">Version: <strong>${version}</strong></div>
-                    <div class="modpack-info-line">Loader: <strong>${loader}</strong></div>
+                    <h3><i class="fas fa-box custom-icon"></i> ModPack: ${name}</h3>
+                    <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong>${version}</strong></div>
+                    <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong>${loader}</strong></div>
                 </div>
             `;
 
-            // إضافته للواجهة وإغلاق النافذة المنبثقة
-            container.insertBefore(card, container.firstChild);
-            toggleModal('add-modal', false);
+            if(id) {
+                database[id] = { name, version, loader, img, desc, download, guide };
+                const card = document.getElementById(id);
+                card.innerHTML = cardContent;
+            } else {
+                const newId = 'pack-' + packCounter++;
+                database[newId] = { name, version, loader, img, desc, download, guide };
 
-            // تصفير حقول الإدخال لتكون جاهزة للمرة القادمة
-            document.getElementById('in-name').value = '';
-            document.getElementById('in-img').value = '';
-            document.getElementById('in-desc').value = '';
-            document.getElementById('in-download').value = '';
-            document.getElementById('in-guide').value = '';
+                const container = document.getElementById('modpacks-container');
+                const card = document.createElement('div');
+                card.className = 'modpack-card';
+                card.id = newId;
+                card.onclick = function() {
+                    openDetailsModal(newId, name, version, loader, img, desc, download, guide);
+                };
+
+                card.innerHTML = cardContent;
+                container.insertBefore(card, container.firstChild);
+            }
+
+            toggleModal('add-modal', false);
         }
     </script>
 </body>
