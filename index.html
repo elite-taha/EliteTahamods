@@ -35,7 +35,7 @@
             padding-bottom: 80px;
         }
 
-        /* الهيدر: مستطيل أعلى اليسار */
+        /* الهيدر: مستطيل أعلى اليسار نظيف وبدون عداد زوار */
         header {
             display: flex;
             justify-content: flex-end;
@@ -59,18 +59,8 @@
             border: 1px solid rgba(0, 242, 254, 0.3);
             box-shadow: 0 0 10px rgba(0, 242, 254, 0.15);
             letter-spacing: 0.5px;
-            cursor: pointer;
             user-select: none;
             -webkit-user-select: none;
-        }
-
-        .visitors-count {
-            font-size: 0.75rem;
-            color: var(--text-fade);
-            padding-right: 5px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
         }
 
         /* حاوية الصفحات */
@@ -163,7 +153,7 @@
         .val-ltw { color: var(--c-ltw) !important; }
         .val-gl4es { color: var(--c-gl4es) !important; }
 
-        /* زر النشر العائم (+) مخفي افتراضياً لحماية المطور */
+        /* زر النشر العائم (+) مخفي تماماً بشكل افتراضي */
         .fab-btn {
             position: fixed; bottom: 90px; left: 20px;
             background-color: var(--success-color); color: white;
@@ -224,17 +214,16 @@
         .btn-download { background-color: #21262d; color: var(--accent-color); border: 1px solid #30363d; }
         .btn-guide { background-color: #388bfd; color: white; }
 
-        /* منطقة تحكم المطور مخفية برمجياً */
+        /* منطقة تحكم المطور مخفية برمجياً وبشكل افتراضي */
         #developer-controls { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر المطور: اضغط مطولاً هنا لتسجيل دخول المطورين وتفعيل لوحة الإدارة -->
+    <!-- الهيدر النظيف والمحدث -->
     <header>
         <div class="header-container">
-            <div class="community-badge" id="dev-lock-btn">Elite Community</div>
-            <div class="visitors-count"><i class="fas fa-eye custom-icon"></i> عدد الزائرين: 1,247</div>
+            <div class="community-badge">Elite Community</div>
         </div>
     </header>
 
@@ -313,7 +302,7 @@
         </div>
     </div>
 
-    <!-- زر النشر العائم (يظهر للمطور المسجل فقط) -->
+    <!-- زر النشر العائم (يظهر تلقائياً للمطور عند إدخال الرمز الصحيح) -->
     <button class="fab-btn" id="add-pack-btn" onclick="openAddModal()">
         <i class="fas fa-plus"></i>
     </button>
@@ -417,7 +406,7 @@
                 <a href="#" id="link-guide" target="_blank" class="btn-action btn-guide">شرح التركيب</a>
             </div>
             
-            <!-- زر التعديل الآمن (يظهر فقط إذا كان الحساب مسجل كـ مطور) -->
+            <!-- زر التعديل الآمن (يظهر فقط للمطور) -->
             <div style="margin-top: 10px;" id="developer-controls">
                 <button class="btn-action btn-edit" style="width: 100%;" id="btn-trigger-edit">✏️ تعديل المنشور (للمطور)</button>
             </div>
@@ -442,7 +431,7 @@
 
     <script>
         let packCounter = 1;
-        let isDeveloper = false; // حماية افتراضية: جميع الداخلين هم أعضاء عاديين
+        let isDeveloper = false; 
         let currentPageId = 'elite-team-page';
         
         let database = {
@@ -455,33 +444,18 @@
             }
         };
 
-        // نظام التحقق السري للمطور عند الضغط مطولاً
-        const devBtn = document.getElementById('dev-lock-btn');
-        let pressTimer;
-
-        devBtn.addEventListener('mousedown', startPress);
-        devBtn.addEventListener('touchstart', startPress);
-        devBtn.addEventListener('mouseup', cancelPress);
-        devBtn.addEventListener('mouseleave', cancelPress);
-        devBtn.addEventListener('touchend', cancelPress);
-
-        function startPress(e) {
-            pressTimer = setTimeout(() => {
-                let password = prompt("أدخل رمز المطور السري لتفعيل لوحة التحكم:");
-                if(password === "1234") { // يمكنك تغيير '1234' لأي رمز تحبه
-                    isDeveloper = true;
-                    alert("مرحباً بك يا مطور! تم تفعيل الصلاحيات الكاملة بنجاح 🛠️");
-                    document.getElementById('developer-controls').style.display = 'block';
-                    updateNavbarVisibility();
-                } else {
-                    alert("الرمز خاطئ، لا تملك صلاحيات المطور.");
-                }
-            }, 3000); // 3 ثوانٍ ضغط مستمر
-        }
-
-        function cancelPress() {
-            clearTimeout(pressTimer);
-        }
+        // نظام طلب كلمة المرور الفوري والآمن عند أول دخول للموقع
+        window.onload = function() {
+            let entryCode = prompt("مرحباً بك في Elite Community\nإذا كنت المطور، يرجى إدخال رمز الوصول للوحة التحكم، أو اضغط إلغاء لتصفح الموقع كعضو:");
+            if (entryCode === "aassddffgg") {
+                isDeveloper = true;
+                alert("تم التعرف عليك كمطور! تم فتح صلاحيات الإنشاء والتعديل الكاملة 🛠️");
+                document.getElementById('developer-controls').style.display = 'block';
+                updateNavbarVisibility();
+            } else {
+                console.log("تم الدخول بوضع زائر عادي.");
+            }
+        };
 
         function updateNavbarVisibility() {
             const addBtn = document.getElementById('add-pack-btn');
@@ -578,7 +552,6 @@
             document.getElementById('link-download').href = data.download || '#';
             document.getElementById('link-guide').href = data.guide || '#';
             
-            // تأمين ظهور زر التعديل داخل المنشور للمطورين فقط
             if(isDeveloper) {
                 document.getElementById('developer-controls').style.display = 'block';
                 document.getElementById('btn-trigger-edit').onclick = function() {
@@ -645,7 +618,6 @@
             `;
 
             if(id) {
-                // إصلاح الحفظ الكامل لجميع الحقول والبيانات الجديدة هنا بشكل دائم
                 database[id] = { name, version, loader, modsCount, ram, renderer, img, desc, download, guide };
                 document.getElementById(id).innerHTML = cardContent;
             } else {
