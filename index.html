@@ -16,6 +16,7 @@
             --text-fade: #8b949e;
             --success-color: #238636;
             --warning-color: #d29922;
+            --danger-color: #f85149;
             
             /* ألوان الخيارات المخصصة */
             --c-forge: #ff4a4a;
@@ -79,7 +80,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* شريط التنقل السفلي يتسع لـ 4 أزرار الآن */
+        /* شريط التنقل السفلي */
         .navbar {
             position: fixed;
             bottom: 0; left: 0; right: 0;
@@ -153,7 +154,7 @@
         .val-ltw { color: var(--c-ltw) !important; }
         .val-gl4es { color: var(--c-gl4es) !important; }
 
-        /* زر النشر العائم (+) مخفي بشكل افتراضي ويتحكم به الـ JS */
+        /* زر النشر العائم (+) */
         .fab-btn {
             position: fixed; bottom: 90px; left: 20px;
             background-color: var(--success-color); color: white;
@@ -162,21 +163,33 @@
             display: none; align-items: center; justify-content: center; z-index: 999;
         }
 
-        /* صفحة أدمن الخاصة بالتسجيل */
-        .admin-page-container {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            min-height: 50vh; text-align: center;
+        /* فورم تسجيل الدخول الحقيقي */
+        .login-card {
+            background-color: var(--card-bg); border: 1px solid #30363d;
+            border-radius: 16px; padding: 30px 25px; width: 100%; max-width: 360px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.3); text-align: center;
         }
-        .btn-admin-login {
-            background: linear-gradient(135deg, #238636 0%, #2ea44f 100%);
-            color: white; border: none; padding: 15px 40px; font-size: 1.2rem;
-            font-weight: bold; border-radius: 30px; cursor: pointer;
-            box-shadow: 0 4px 15px rgba(46, 164, 79, 0.4); transition: 0.3s;
+        .login-card h3 { margin: 0 0 20px 0; color: var(--accent-color); font-size: 1.4rem; }
+        .login-input {
+            width: 100%; padding: 12px; background-color: var(--bg-color);
+            border: 1px solid #30363d; border-radius: 8px; color: white;
+            font-size: 1rem; text-align: center; margin-bottom: 15px; box-sizing: border-box;
         }
-        .btn-admin-login:hover { transform: scale(1.05); box-shadow: 0 6px 20px rgba(46, 164, 79, 0.6); }
+        .login-input:focus { border-color: var(--accent-color); outline: none; }
+        .btn-login-submit {
+            width: 100%; background: linear-gradient(135deg, #238636 0%, #2ea44f 100%);
+            color: white; border: none; padding: 12px; font-size: 1rem;
+            font-weight: bold; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .btn-login-submit:hover { opacity: 0.9; }
+
         .admin-status-box {
             background-color: var(--card-bg); border: 1px dashed var(--success-color);
-            padding: 20px; border-radius: 12px; max-width: 400px;
+            padding: 25px; border-radius: 12px; max-width: 400px; text-align: center;
+        }
+        .btn-logout {
+            background-color: var(--danger-color); color: white; border: none;
+            padding: 8px 16px; border-radius: 6px; font-weight: bold; cursor: pointer; margin-top: 15px;
         }
 
         /* النوافذ المنبثقة */
@@ -202,19 +215,12 @@
         }
         
         select option { background-color: var(--card-bg); color: var(--text-color); }
-        option.opt-forge { color: var(--c-forge); }
-        option.opt-fabric { color: var(--c-fabric); }
-        option.opt-neoforge { color: var(--c-neoforge); }
-        option.opt-mglues { color: var(--c-mglue); }
-        option.opt-ltw { color: var(--c-ltw); }
-        option.opt-gl4es { color: var(--c-gl4es); }
 
         .file-upload-btn {
             background-color: #21262d; border: 1px dashed var(--accent-color);
             color: var(--text-color); padding: 12px; border-radius: 6px;
             text-align: center; cursor: pointer; font-size: 0.9rem; transition: 0.3s;
         }
-        .file-upload-btn:hover { background-color: #30363d; }
         #preview-img-holder { width: 100%; max-height: 120px; object-fit: cover; margin-top: 8px; border-radius: 6px; display: none; }
 
         .description-box {
@@ -231,8 +237,11 @@
         .btn-download { background-color: #21262d; color: var(--accent-color); border: 1px solid #30363d; }
         .btn-guide { background-color: #388bfd; color: white; }
 
-        /* حاوية أزرار تحكم الأدمن بالتعديل وحذف المودباك */
         #developer-controls { display: none; margin-top: 12px; }
+        
+        .admin-page-container {
+            display: flex; align-items: center; justify-content: center; min-height: 60vh;
+        }
     </style>
 </head>
 <body>
@@ -293,7 +302,7 @@
     <!-- ================= صفحة 2: Modpack ================= -->
     <div id="modpack-page" class="page">
         <div class="modpack-list" id="modpacks-container">
-            <!-- سيتم بناء المنشور تلقائياً هنا بواسطة الـ JavaScript لضمان عمل الحفظ بشكل صحيح -->
+            <!-- يتم التوليد من قاعدة البيانات المستقرة بالـ JS -->
         </div>
     </div>
 
@@ -312,27 +321,30 @@
         </div>
     </div>
 
-    <!-- ================= صفحة 4: Admin (جديدة) ================= -->
+    <!-- ================= صفحة 4: Admin ================= -->
     <div id="admin-page" class="page">
         <div class="admin-page-container" id="admin-area">
-            <!-- يظهر هذا الزر بنصف الشاشة لتسجيل الدخول -->
-            <button class="btn-admin-login" id="login-trigger-btn" onclick="askAdminPassword()">Admin Login</button>
+            <!-- واجهة الدخول الحقيقية الافتراضية -->
+            <div class="login-card" id="login-form-card">
+                <h3>تسجيل دخول الإدارة</h3>
+                <input type="password" id="admin-password-input" class="login-input" placeholder="أدخل رمز الدخول الماستر">
+                <button class="btn-login-submit" onclick="submitRealLogin()">دخول لـ لوحة التحكم</button>
+            </div>
         </div>
     </div>
 
-    <!-- زر النشر العائم (يظهر تلقائياً للادمن عند تفعيل الوضع في صفحة المودباك) -->
+    <!-- زر النشر العائم (+) -->
     <button class="fab-btn" id="add-pack-btn" onclick="openAddModal()">
         <i class="fas fa-plus"></i>
     </button>
 
-    <!-- نافذة النشر والتعديل (Form الإدخال) -->
+    <!-- نافذة النشر والتعديل (Form الإدخل) -->
     <div class="modal" id="add-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h2 id="modal-form-title">نشر مود باك جديد 🚀</h2>
                 <button class="close-modal" onclick="toggleModal('add-modal', false)">&times;</button>
             </div>
-            <!-- حقول خفية لتخزين البيانات المؤقتة والصورة والمعرف -->
             <input type="hidden" id="edit-target-id">
             <input type="hidden" id="stored-img-base64">
             
@@ -348,9 +360,9 @@
             <div class="form-group">
                 <label>نوع المشغل (Loader)</label>
                 <select id="in-loader">
-                    <option value="NeoForge" class="opt-neoforge">NeoForge</option>
-                    <option value="Forge" class="opt-forge">Forge</option>
-                    <option value="Fabric" class="opt-fabric">Fabric</option>
+                    <option value="NeoForge">NeoForge</option>
+                    <option value="Forge">Forge</option>
+                    <option value="Fabric">Fabric</option>
                 </select>
             </div>
 
@@ -366,9 +378,9 @@
             <div class="form-group">
                 <label>يدعم عارض (Renderer Support)</label>
                 <select id="in-renderer">
-                    <option value="MobileGlues" class="opt-mglues">MobileGlues</option>
-                    <option value="LTW" class="opt-ltw">LTW</option>
-                    <option value="GL4ES" class="opt-gl4es">GL4ES</option>
+                    <option value="MobileGlues">MobileGlues</option>
+                    <option value="LTW">LTW</option>
+                    <option value="GL4ES">GL4ES</option>
                     <option value="Any renderer">Any renderer</option>
                 </select>
             </div>
@@ -394,7 +406,7 @@
                 <label>رابط شرح التركيب</label>
                 <input type="text" id="in-guide" placeholder="https://...">
             </div>
-            <button class="btn-action btn-save" style="width:100%; margin-top:10px;" onclick="saveModpackProcess()">حفظ ونشر التعديلات</button>
+            <button class="btn-action btn-save" style="width:100%; margin-top:10px;" onclick="saveModpackProcess()">حفظ ونشر التعديلات الحالية</button>
         </div>
     </div>
 
@@ -425,14 +437,13 @@
                 <a href="#" id="link-guide" target="_blank" class="btn-action btn-guide">شرح التركيب</a>
             </div>
             
-            <!-- أزرار تحكم الإدارة والتعديل تظهر هنا فقط للأدمن -->
             <div id="developer-controls">
                 <button class="btn-action btn-edit" style="width: 100%;" id="btn-trigger-edit">✏️ تعديل هذا المنشور</button>
             </div>
         </div>
     </div>
 
-    <!-- شريط التنقل السفلي المطور (يحتوي على خيار الـ Admin) -->
+    <!-- شريط التنقل السفلي -->
     <nav class="navbar">
         <button class="nav-item active" onclick="switchPage('elite-team-page', this)">
             <i class="fas fa-users"></i>
@@ -453,12 +464,11 @@
     </nav>
 
     <script>
-        let packCounter = 1;
         let isDeveloper = false; 
         let currentPageId = 'elite-team-page';
         
-        // المنشور الافتراضي بالمعلومات والصورة التي طلبتها مدمج بالكامل داخل القاعدة
-        let database = {
+        // المنشور الأساسي الافتراضي للموقع
+        const defaultDatabase = {
             'pack-0': {
                 name: 'Elite Dim', version: '1.21.1', loader: 'NeoForge',
                 modsCount: '140', ram: '8+', renderer: 'MobileGlues',
@@ -468,30 +478,68 @@
             }
         };
 
-        // تشغيل البناء الأولي للمنشورات عند فتح الصفحة لربط أداة التعديل والحفظ بشكل صحيح
+        let database = {};
+
+        // عند فتح الصفحة: يتم جلب البيانات وحالة الدخول فوراً من الذاكرة الدائمة
         window.onload = function() {
+            // 1. جلب أو تعيين قاعدة البيانات الثابتة
+            const storedData = localStorage.getItem('elite_modpacks_db');
+            if (storedData) {
+                database = JSON.parse(storedData);
+            } else {
+                database = { ...defaultDatabase };
+                localStorage.setItem('elite_modpacks_db', JSON.stringify(database));
+            }
             renderAllModpacks();
+
+            // 2. فحص حالة تسجيل الدخول الدائم للآدمن
+            const loggedInStatus = localStorage.getItem('elite_admin_logged');
+            if (loggedInStatus === 'true') {
+                isDeveloper = true;
+                showAdminDashboardUI();
+            }
         };
 
-        // نظام التحقق الجديد من صفحة Admin
-        function askAdminPassword() {
-            let pwd = prompt("يرجى إدخال رمز الإدارة لفتح صلاحيات التعديل والنشر:");
-            if(pwd === "aassddffgg") {
+        // دالة تسجيل الدخول الحقيقي الآمن
+        function submitRealLogin() {
+            const inputVal = document.getElementById('admin-password-input').value;
+            if (inputVal === "aassddffgg") {
                 isDeveloper = true;
-                alert("تم التحقق بنجاح! تم فتح أزرار الإضافة والتعديل 🛠️");
-                
-                // تحويل واجهة صفحة الأدمن إلى صندوق حالة مفعل
-                document.getElementById('admin-area').innerHTML = `
-                    <div class="admin-status-box">
-                        <i class="fas fa-check-circle" style="color: var(--success-color); font-size: 2.5rem; margin-bottom:10px;"></i>
-                        <h3 style="margin:5px 0; color:white;">وضع المطور نشط حالياً</h3>
-                        <p style="font-size:0.85rem; color:var(--text-fade);">يمكنك الآن الذهاب لصفحة Modpack لإنشاء وتعديل المنشورات بكل سهولة.</p>
-                    </div>
-                `;
+                localStorage.setItem('elite_admin_logged', 'true'); // تذكر الحساب للأبد
+                alert("تم تسجيل الدخول بنجاح كمطور الموقع! 🛠️");
+                showAdminDashboardUI();
                 updateNavbarVisibility();
             } else {
-                alert("الرمز غير صحيح! حاول مجدداً.");
+                alert("الرمز السري غير صحيح بالمرة، حاول مرة أخرى!");
             }
+        }
+
+        // تسجيل الخروج وإعادة الموقع كعضو عادي
+        function submitLogout() {
+            isDeveloper = false;
+            localStorage.removeItem('elite_admin_logged');
+            alert("تم تسجيل الخروج بنجاح والعودة لوضع الزائر.");
+            
+            // إعادة واجهة تسجيل الدخول الأصلية
+            document.getElementById('admin-area').innerHTML = `
+                <div class="login-card" id="login-form-card">
+                    <h3>تسجيل دخول الإدارة</h3>
+                    <input type="password" id="admin-password-input" class="login-input" placeholder="أدخل رمز الدخول الماستر">
+                    <button class="btn-login-submit" onclick="submitRealLogin()">دخول لـ لوحة التحكم</button>
+                </div>
+            `;
+            updateNavbarVisibility();
+        }
+
+        function showAdminDashboardUI() {
+            document.getElementById('admin-area').innerHTML = `
+                <div class="admin-status-box">
+                    <i class="fas fa-user-check" style="color: var(--success-color); font-size: 2.8rem; margin-bottom:10px;"></i>
+                    <h3 style="margin:5px 0; color:white;">لوحة التحكم نشطة (أدمن)</h3>
+                    <p style="font-size:0.85rem; color:var(--text-fade); margin-bottom:15px;">صلاحيات النشر، الحفظ وتعديل الكروت الحالية مفعلة بشكل دائم ومربوطة بذاكرة المتصفح.</p>
+                    <button class="btn-logout" onclick="submitLogout()">تسجيل خروج</button>
+                </div>
+            `;
         }
 
         function updateNavbarVisibility() {
@@ -566,7 +614,6 @@
             return '';
         }
 
-        // بناء وعرض المنشورات بشكل ديناميكي لتسهيل التحديث الفوري والحفظ
         function renderAllModpacks() {
             const container = document.getElementById('modpacks-container');
             container.innerHTML = "";
@@ -614,7 +661,6 @@
             document.getElementById('link-download').href = data.download || '#';
             document.getElementById('link-guide').href = data.guide || '#';
             
-            // إظهار أزرار التعديل إذا كان المسجل هو الأدمن
             if(isDeveloper) {
                 document.getElementById('developer-controls').style.display = 'block';
                 document.getElementById('btn-trigger-edit').onclick = function() {
@@ -652,7 +698,7 @@
             toggleModal('add-modal', true);
         }
 
-        // معالجة الحفظ المصلحة والآمنة لتعديل البيانات فورياً في الذاكرة والقائمة دون فقدانها
+        // دالة الحفظ المحدثة والمنقذة: تحفظ كل شيء في ذاكرة المتصفح الصلبة لحل مشكلة الإلغاء
         function saveModpackProcess() {
             const id = document.getElementById('edit-target-id').value;
             const name = document.getElementById('in-name').value;
@@ -667,23 +713,25 @@
             
             let img = document.getElementById('stored-img-base64').value;
             if(!img) { 
-                img = '1002927121.png'; // الحفاظ على الصورة الأساسية في حال عدم رفع واحدة جديدة
+                img = id ? database[id].img : '1002927121.png';
             }
 
             if(!name) { alert('الرجاء كتابة اسم المود باك!'); return; }
 
-            // التحديث المباشر داخل الـ Object لإنهاء مشكلة عدم التغير عند الحفظ
             if(id) {
                 database[id] = { name, version, loader, modsCount, ram, renderer, img, desc, download, guide };
             } else {
-                const newId = 'pack-' + packCounter++;
+                // توليد ID فريد بناءً على طابع زمني دقيق لمنع تضارب المنشورات
+                const newId = 'pack_' + Date.now();
                 database[newId] = { name, version, loader, modsCount, ram, renderer, img, desc, download, guide };
             }
 
-            // إعادة بناء القائمة بالبيانات الجديدة المعدلة
+            // سحر المزامنة: حفظ التعديل بشكل دائم في متصفحك
+            localStorage.setItem('elite_modpacks_db', JSON.stringify(database));
+
             renderAllModpacks();
             toggleModal('add-modal', false);
-            alert('تم الحفظ وتحديث البيانات بنجاح! 🎉');
+            alert('تم الحفظ والتخزين الدائم بنجاح تام! 🎉');
         }
     </script>
 </body>
