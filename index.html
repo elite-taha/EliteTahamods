@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+here<!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -15,15 +15,10 @@
             --text-color: #c9d1d9;
             --text-fade: #8b949e;
             --success-color: #238636;
-            --warning-color: #d29922;
             
             /* ألوان الخيارات المخصصة */
-            --c-forge: #ff4a4a;
-            --c-fabric: #ffca28;
             --c-neoforge: #00e5ff;
             --c-mglue: #ff9100;
-            --c-ltw: #b388ff;
-            --c-gl4es: #00e676;
         }
 
         body {
@@ -35,7 +30,7 @@
             padding-bottom: 80px;
         }
 
-        /* الهيدر: مستطيل أعلى اليسار نظيف وبدون عداد زوار */
+        /* الهيدر */
         header {
             display: flex;
             justify-content: flex-end;
@@ -129,9 +124,9 @@
             border-radius: 12px; overflow: hidden; cursor: pointer; transition: 0.3s;
         }
         .modpack-card:hover { border-color: var(--accent-color); }
-        .modpack-img { width: 100%; height: 160px; object-fit: cover; background-color: #21262d; }
+        .modpack-img { width: 100%; height: 200px; object-fit: cover; background-color: #21262d; }
         .modpack-details { padding: 15px; text-align: right; }
-        .modpack-details h3 { margin: 0 0 10px 0; color: var(--accent-color); display: flex; align-items: center; gap: 8px; }
+        .modpack-details h3 { margin: 0 0 12px 0; color: var(--accent-color); display: flex; align-items: center; gap: 8px; }
         
         .custom-icon {
             color: #ffffff !important;
@@ -142,25 +137,12 @@
             width: 20px;
         }
         
-        .modpack-info-line { font-size: 0.9rem; margin: 6px 0; color: var(--text-fade); display: flex; align-items: center; gap: 8px; }
+        .modpack-info-line { font-size: 0.9rem; margin: 8px 0; color: var(--text-fade); display: flex; align-items: center; gap: 8px; }
         .modpack-info-line strong { color: var(--text-color); }
 
         /* تلوين قيم الخيارات */
-        .val-forge { color: var(--c-forge) !important; }
-        .val-fabric { color: var(--c-fabric) !important; }
         .val-neoforge { color: var(--c-neoforge) !important; }
         .val-mglues { color: var(--c-mglue) !important; }
-        .val-ltw { color: var(--c-ltw) !important; }
-        .val-gl4es { color: var(--c-gl4es) !important; }
-
-        /* زر النشر العائم (+) مخفي تماماً بشكل افتراضي */
-        .fab-btn {
-            position: fixed; bottom: 90px; left: 20px;
-            background-color: var(--success-color); color: white;
-            border: none; border-radius: 50%; width: 55px; height: 55px;
-            font-size: 1.6rem; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.4);
-            display: none; align-items: center; justify-content: center; z-index: 999;
-        }
 
         /* النوافذ المنبثقة */
         .modal {
@@ -178,28 +160,6 @@
         .modal-header h2 { margin: 0; color: var(--accent-color); font-size: 1.3rem; display: flex; align-items: center; gap: 8px; }
         .close-modal { background: none; border: none; color: var(--text-fade); font-size: 1.5rem; cursor: pointer; }
 
-        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; text-align: right; }
-        .form-group label { font-size: 0.9rem; color: var(--text-fade); }
-        .form-group input, .form-group textarea, .form-group select {
-            background-color: var(--bg-color); border: 1px solid #30363d; border-radius: 6px; padding: 10px; color: var(--text-color); font-family: inherit;
-        }
-        
-        select option { background-color: var(--card-bg); color: var(--text-color); }
-        option.opt-forge { color: var(--c-forge); }
-        option.opt-fabric { color: var(--c-fabric); }
-        option.opt-neoforge { color: var(--c-neoforge); }
-        option.opt-mglues { color: var(--c-mglue); }
-        option.opt-ltw { color: var(--c-ltw); }
-        option.opt-gl4es { color: var(--c-gl4es); }
-
-        .file-upload-btn {
-            background-color: #21262d; border: 1px dashed var(--accent-color);
-            color: var(--text-color); padding: 12px; border-radius: 6px;
-            text-align: center; cursor: pointer; font-size: 0.9rem; transition: 0.3s;
-        }
-        .file-upload-btn:hover { background-color: #30363d; }
-        #preview-img-holder { width: 100%; max-height: 120px; object-fit: cover; margin-top: 8px; border-radius: 6px; display: none; }
-
         .description-box {
             background-color: #0d1117; border: 1px solid #30363d; border-radius: 8px;
             padding: 15px; margin: 15px 0; text-align: right;
@@ -209,18 +169,13 @@
 
         .form-buttons { display: flex; gap: 10px; margin-top: 15px; }
         .btn-action { flex: 1; padding: 10px; border: none; border-radius: 6px; font-weight: bold; cursor: pointer; text-decoration: none; text-align: center; }
-        .btn-save { background-color: var(--success-color); color: white; }
-        .btn-edit { background-color: var(--warning-color); color: black; }
         .btn-download { background-color: #21262d; color: var(--accent-color); border: 1px solid #30363d; }
         .btn-guide { background-color: #388bfd; color: white; }
-
-        /* منطقة تحكم المطور مخفية برمجياً وبشكل افتراضي */
-        #developer-controls { display: none; }
     </style>
 </head>
 <body>
 
-    <!-- الهيدر النظيف والمحدث -->
+    <!-- الهيدر -->
     <header>
         <div class="header-container">
             <div class="community-badge">Elite Community</div>
@@ -273,15 +228,16 @@
         </div>
     </div>
 
-    <!-- ================= صفحة 2: Modpack ================= -->
+    <!-- ================= صفحة 2: Modpack (تعديل وعرض المنشور الثابت) ================= -->
     <div id="modpack-page" class="page">
-        <div class="modpack-list" id="modpacks-container">
-            <div class="modpack-card" id="pack-0" onclick="openDetailsModal('pack-0')">
-                <img src="https://images.unsplash.com/photo-1607988795691-3d0147b43231?w=600" class="modpack-img" alt="Modpack Image">
+        <div class="modpack-list">
+            <!-- الكارت الخاص بالمودباك الجديد -->
+            <div class="modpack-card" onclick="openDetailsModal()">
+                <img src="1002927121.png" class="modpack-img" alt="Modpack Image">
                 <div class="modpack-details">
-                    <h3><i class="fas fa-box custom-icon"></i> ModPack: Elite RPG</h3>
-                    <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong>1.1.1.1</strong></div>
-                    <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong class="val-forge">Forge</strong></div>
+                    <h3><i class="fas fa-box custom-icon"></i> ModPack: Elite Dim</h3>
+                    <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> الإصدار: <strong>1.21.1</strong></div>
+                    <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> المشغل: <strong class="val-neoforge">NeoForge</strong></div>
                 </div>
             </div>
         </div>
@@ -302,113 +258,31 @@
         </div>
     </div>
 
-    <!-- زر النشر العائم (يظهر تلقائياً للمطور عند إدخال الرمز الصحيح) -->
-    <button class="fab-btn" id="add-pack-btn" onclick="openAddModal()">
-        <i class="fas fa-plus"></i>
-    </button>
-
-    <!-- نافذة النشر والتعديل -->
-    <div class="modal" id="add-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="modal-form-title">نشر مود باك جديد 🚀</h2>
-                <button class="close-modal" onclick="toggleModal('add-modal', false)">&times;</button>
-            </div>
-            <input type="hidden" id="edit-target-id">
-            <input type="hidden" id="stored-img-base64">
-            
-            <div class="form-group">
-                <label>اسم المود باك (ModPack Name)</label>
-                <input type="text" id="in-name" placeholder="مثال: Elite Survival">
-            </div>
-            <div class="form-group">
-                <label>الإصدار (Version)</label>
-                <input type="text" id="in-version" value="1.0.0">
-            </div>
-            
-            <div class="form-group">
-                <label>نوع المشغل (Loader)</label>
-                <select id="in-loader">
-                    <option value="Forge" class="opt-forge">Forge</option>
-                    <option value="Fabric" class="opt-fabric">Fabric</option>
-                    <option value="NeoForge" class="opt-neoforge">NeoForge</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>عدد المودات (Mods Count)</label>
-                <input type="number" id="in-mods-count" value="50">
-            </div>
-            <div class="form-group">
-                <label>يتطلب رام (Required RAM)</label>
-                <input type="text" id="in-ram" value="4GB">
-            </div>
-
-            <div class="form-group">
-                <label>يدعم عارض (Renderer Support)</label>
-                <select id="in-renderer">
-                    <option value="MobileGlues" class="opt-mglues">MobileGlues</option>
-                    <option value="LTW" class="opt-ltw">LTW</option>
-                    <option value="GL4ES" class="opt-gl4es">GL4ES</option>
-                    <option value="Any renderer" style="color: #58a6ff;">Any renderer</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>صورة غلاف المودباك</label>
-                <div class="file-upload-btn" onclick="document.getElementById('file-input').click()">
-                    <i class="fas fa-image custom-icon" style="margin-left:5px;"></i> 📁 اختر صورة من الاستوديو
-                </div>
-                <input type="file" id="file-input" accept="image/*" style="display:none;" onchange="handleImageUpload(this)">
-                <img id="preview-img-holder" alt="Preview">
-            </div>
-
-            <div class="form-group">
-                <label>الوصف بالكامل (Description)</label>
-                <textarea id="in-desc" rows="4" placeholder="اكتب التفاصيل هنا..."></textarea>
-            </div>
-            <div class="form-group">
-                <label>رابط التحميل</label>
-                <input type="text" id="in-download" placeholder="https://...">
-            </div>
-            <div class="form-group">
-                <label>رابط شرح التركيب</label>
-                <input type="text" id="in-guide" placeholder="https://...">
-            </div>
-            <button class="btn-action btn-save" style="width:100%; margin-top:10px;" id="btn-submit-form" onclick="saveModpackProcess()">حفظ ونشر المود باك</button>
-        </div>
-    </div>
-
-    <!-- نافذة عرض التفاصيل الكاملة للأعضاء والمطور -->
+    <!-- نافذة عرض التفاصيل الكاملة الثابتة للمودباك -->
     <div class="modal" id="details-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 id="det-name"><i class="fas fa-box custom-icon"></i> اسم المود باك</h2>
-                <button class="close-modal" onclick="toggleModal('details-modal', false)">&times;</button>
+                <h2><i class="fas fa-box custom-icon"></i> ModPack: Elite Dim</h2>
+                <button class="close-modal" onclick="toggleModal(false)">&times;</button>
             </div>
-            <img src="" id="det-img" class="modpack-img" style="border-radius: 8px;">
+            <img src="1002927121.png" class="modpack-img" style="border-radius: 8px;">
             
             <div class="modpack-details" style="padding:10px 0;">
-                <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong id="det-version"></strong></div>
-                <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong id="det-loader"></strong></div>
-                <div class="modpack-info-line"><i class="fas fa-list-ol custom-icon"></i> Mods Count: <strong id="det-mods-count" style="color:#ffffff;"></strong></div>
-                <div class="modpack-info-line"><i class="fas fa-memory custom-icon"></i> يتطلب رام: <strong id="det-ram" style="color:#ffffff;"></strong></div>
-                <div class="modpack-info-line"><i class="fas fa-desktop custom-icon"></i> يدعم عارض: <strong id="det-renderer"></strong></div>
+                <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> الإصدار: <strong>1.21.1</strong></div>
+                <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> المشغل: <strong class="val-neoforge">NeoForge</strong></div>
+                <div class="modpack-info-line"><i class="fas fa-list-ol custom-icon"></i> عدد المودات: <strong style="color:#ffffff;">140 مود</strong></div>
+                <div class="modpack-info-line"><i class="fas fa-memory custom-icon"></i> يتطلب رام: <strong style="color:#ffffff;">+8GB</strong></div>
+                <div class="modpack-info-line"><i class="fas fa-desktop custom-icon"></i> يتطلب عارض: <strong class="val-mglues">MobileGlues</strong></div>
             </div>
             
             <div class="description-box">
                 <span class="description-title"><i class="fas fa-file-text custom-icon"></i> الوصف:</span>
-                <p class="modal-desc" id="det-desc">هنا يظهر الديسكربشن...</p>
+                <p class="modal-desc">مرحباً بكم في حزمة المودات الجديدة والمطورة كلياً على إصدار 1.21.1 NeoForge لتجربة استكشاف أبعاد فريدة ومغامرات أسطورية غامرة ومستقرة تماماً على الجوال.</p>
             </div>
 
             <div class="form-buttons">
-                <a href="#" id="link-download" target="_blank" class="btn-action btn-download">رابط تحميل</a>
-                <a href="#" id="link-guide" target="_blank" class="btn-action btn-guide">شرح التركيب</a>
-            </div>
-            
-            <!-- زر التعديل الآمن (يظهر فقط للمطور) -->
-            <div style="margin-top: 10px;" id="developer-controls">
-                <button class="btn-action btn-edit" style="width: 100%;" id="btn-trigger-edit">✏️ تعديل المنشور (للمطور)</button>
+                <a href="#" target="_blank" class="btn-action btn-download">رابط تحميل</a>
+                <a href="#" target="_blank" class="btn-action btn-guide">شرح التركيب</a>
             </div>
         </div>
     </div>
@@ -430,212 +304,22 @@
     </nav>
 
     <script>
-        let packCounter = 1;
-        let isDeveloper = false; 
-        let currentPageId = 'elite-team-page';
-        
-        let database = {
-            'pack-0': {
-                name: 'Elite RPG', version: '1.1.1.1', loader: 'Forge',
-                modsCount: '145', ram: '4GB', renderer: 'GL4ES',
-                img: 'https://images.unsplash.com/photo-1607988795691-3d0147b43231?w=600',
-                desc: 'هذا المودباك يضيف تجربة مغامرات أسطورية لماينكرافت مع وحوش ورؤساء جدد وتطويرات خرافية للأسلحة والدروع.',
-                download: '#', guide: '#'
-            }
-        };
-
-        // نظام طلب كلمة المرور الفوري والآمن عند أول دخول للموقع
-        window.onload = function() {
-            let entryCode = prompt("مرحباً بك في Elite Community\nإذا كنت المطور، يرجى إدخال رمز الوصول للوحة التحكم، أو اضغط إلغاء لتصفح الموقع كعضو:");
-            if (entryCode === "aassddffgg") {
-                isDeveloper = true;
-                alert("تم التعرف عليك كمطور! تم فتح صلاحيات الإنشاء والتعديل الكاملة 🛠️");
-                document.getElementById('developer-controls').style.display = 'block';
-                updateNavbarVisibility();
-            } else {
-                console.log("تم الدخول بوضع زائر عادي.");
-            }
-        };
-
-        function updateNavbarVisibility() {
-            const addBtn = document.getElementById('add-pack-btn');
-            if(isDeveloper && currentPageId === 'modpack-page') {
-                addBtn.style.display = 'flex';
-            } else {
-                addBtn.style.display = 'none';
-            }
-        }
-
         function switchPage(pageId, button) {
-            currentPageId = pageId;
             document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
             document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
             document.getElementById(pageId).classList.add('active');
             button.classList.add('active');
-
-            updateNavbarVisibility();
         }
 
-        function toggleModal(modalId, show) {
-            const modal = document.getElementById(modalId);
+        function toggleModal(show) {
+            const modal = document.getElementById('details-modal');
             if(show) modal.classList.add('active');
             else modal.classList.remove('active');
         }
 
-        function handleImageUpload(input) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('stored-img-base64').value = e.target.result;
-                    const preview = document.getElementById('preview-img-holder');
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(file);
-            }
-        }
-
-        function openAddModal() {
-            if(!isDeveloper) return;
-            document.getElementById('modal-form-title').innerText = "نشر مود باك جديد 🚀";
-            document.getElementById('edit-target-id').value = "";
-            document.getElementById('stored-img-base64').value = "";
-            document.getElementById('preview-img-holder').style.display = 'none';
-            
-            document.getElementById('in-name').value = '';
-            document.getElementById('in-version').value = '1.0.0';
-            document.getElementById('in-loader').value = 'Forge';
-            document.getElementById('in-mods-count').value = '50';
-            document.getElementById('in-ram').value = '4GB';
-            document.getElementById('in-renderer').value = 'MobileGlues';
-            document.getElementById('in-desc').value = '';
-            document.getElementById('in-download').value = '';
-            document.getElementById('in-guide').value = '';
-            
-            toggleModal('add-modal', true);
-        }
-
-        function getLoaderClass(loader) {
-            if(loader === 'Forge') return 'val-forge';
-            if(loader === 'Fabric') return 'val-fabric';
-            if(loader === 'NeoForge') return 'val-neoforge';
-            return '';
-        }
-        function getRendererClass(ren) {
-            if(ren === 'MobileGlues') return 'val-mglues';
-            if(ren === 'LTW') return 'val-ltw';
-            if(ren === 'GL4ES') return 'val-gl4es';
-            return '';
-        }
-
-        function openDetailsModal(id) {
-            const data = database[id];
-            if(!data) return;
-            
-            document.getElementById('det-name').innerHTML = `<i class="fas fa-box custom-icon"></i> ModPack: ${data.name}`;
-            document.getElementById('det-version').innerText = data.version;
-            
-            const lClass = getLoaderClass(data.loader);
-            document.getElementById('det-loader').className = lClass;
-            document.getElementById('det-loader').innerText = data.loader;
-            
-            document.getElementById('det-mods-count').innerText = data.modsCount;
-            document.getElementById('det-ram').innerText = data.ram;
-            
-            const rClass = getRendererClass(data.renderer);
-            document.getElementById('det-renderer').className = rClass;
-            document.getElementById('det-renderer').innerText = data.renderer;
-
-            document.getElementById('det-img').src = data.img;
-            document.getElementById('det-desc').innerText = data.desc || 'لا يوجد وصف متاح.';
-            document.getElementById('link-download').href = data.download || '#';
-            document.getElementById('link-guide').href = data.guide || '#';
-            
-            if(isDeveloper) {
-                document.getElementById('developer-controls').style.display = 'block';
-                document.getElementById('btn-trigger-edit').onclick = function() {
-                    toggleModal('details-modal', false);
-                    triggerEditPack(id);
-                };
-            } else {
-                document.getElementById('developer-controls').style.display = 'none';
-            }
-
-            toggleModal('details-modal', true);
-        }
-
-        function triggerEditPack(id) {
-            const data = database[id];
-            if(!data) return;
-
-            document.getElementById('modal-form-title').innerText = "✏️ تعديل منشور المود باك";
-            document.getElementById('edit-target-id').value = id;
-            document.getElementById('in-name').value = data.name;
-            document.getElementById('in-version').value = data.version;
-            document.getElementById('in-loader').value = data.loader;
-            document.getElementById('in-mods-count').value = data.modsCount;
-            document.getElementById('in-ram').value = data.ram;
-            document.getElementById('in-renderer').value = data.renderer;
-            document.getElementById('in-desc').value = data.desc;
-            document.getElementById('in-download').value = data.download;
-            document.getElementById('in-guide').value = data.guide;
-            
-            document.getElementById('stored-img-base64').value = data.img;
-            const preview = document.getElementById('preview-img-holder');
-            preview.src = data.img;
-            preview.style.display = 'block';
-
-            toggleModal('add-modal', true);
-        }
-
-        function saveModpackProcess() {
-            const id = document.getElementById('edit-target-id').value;
-            const name = document.getElementById('in-name').value;
-            const version = document.getElementById('in-version').value;
-            const loader = document.getElementById('in-loader').value;
-            const modsCount = document.getElementById('in-mods-count').value;
-            const ram = document.getElementById('in-ram').value;
-            const renderer = document.getElementById('in-renderer').value;
-            const desc = document.getElementById('in-desc').value;
-            const download = document.getElementById('in-download').value;
-            const guide = document.getElementById('in-guide').value;
-            
-            let img = document.getElementById('stored-img-base64').value;
-            if(!img) { img = 'https://via.placeholder.com/600x300/161b22/58a6ff?text=' + encodeURIComponent(name); }
-
-            if(!name) { alert('الرجاء كتابة اسم المود باك!'); return; }
-
-            const lClass = getLoaderClass(loader);
-
-            const cardContent = `
-                <img src="${img}" class="modpack-img" alt="Modpack Image">
-                <div class="modpack-details">
-                    <h3><i class="fas fa-box custom-icon"></i> ModPack: ${name}</h3>
-                    <div class="modpack-info-line"><i class="fas fa-code-branch custom-icon"></i> Version: <strong>${version}</strong></div>
-                    <div class="modpack-info-line"><i class="fas fa-gears custom-icon"></i> Loader: <strong class="${lClass}">${loader}</strong></div>
-                </div>
-            `;
-
-            if(id) {
-                database[id] = { name, version, loader, modsCount, ram, renderer, img, desc, download, guide };
-                document.getElementById(id).innerHTML = cardContent;
-            } else {
-                const newId = 'pack-' + packCounter++;
-                database[newId] = { name, version, loader, modsCount, ram, renderer, img, desc, download, guide };
-
-                const container = document.getElementById('modpacks-container');
-                const card = document.createElement('div');
-                card.className = 'modpack-card';
-                card.id = newId;
-                card.onclick = function() { openDetailsModal(newId); };
-                card.innerHTML = cardContent;
-                container.insertBefore(card, container.firstChild);
-            }
-
-            toggleModal('add-modal', false);
+        function openDetailsModal() {
+            toggleModal(true);
         }
     </script>
 </body>
 </html>
-
